@@ -17,7 +17,6 @@ function createPost(post) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       posts.push(post);
-
       const error = false;
 
       if(!error) {
@@ -29,42 +28,25 @@ function createPost(post) {
   });
 }
 
-// createPost({title: 'Post Three', body: 'This is post Three'})
-//   .then(getPosts)
-//   .catch(err => console.log(err));
+/**
+ * Promise example 
+ */
 
-// Async / Await
+createPost({title: 'Post Three', body: 'This is post Three'})
+  .then(getPosts)
+  .catch(err => console.log(err));
 
-// async function init() {
-//   await createPost({title: 'Post Three', body: 'This is post Three'});
-//   getPosts();
-// }
+/**
+ * Handle multiple promise using Promise.all() 
+ */
 
-// init();
+const promise1 = Promise.resolve('Hello World');
+const promise2 = 10;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 2000, 'Goodbye');
+});
 
-// Aysnc / Await / Fetch
+const promise4  = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json())
 
-async function fetchUsers() {
-  try {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users')
-    const data = await res.json();
-  
-    console.log(data);
-  }
-  catch (e) {
-    console.log(e)
-  }
-}
-
-fetchUsers();
-
-// const promise1 = Promise.resolve('Hello World');
-// const promise2 = 10;
-// const promise3 = new Promise((resolve, reject) => {
-//   setTimeout(resolve, 2000, 'Goodbye');
-// });
-
-// const promise4  = fetch('https://jsonplaceholder.typicode.com/users')
-//   .then(res => res.json())
-
-// Promise.all([promise1, promise2, promise3, promise4]).then((values) => console.log(values));
+Promise.all([promise1, promise2, promise3, promise4]).then((values) => console.log(values));
